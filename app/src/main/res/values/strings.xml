@@ -29,4 +29,7 @@
   <string name="alertTitle_success">Sucesso</string>
   <string name="alertTitle_error">Erro!</string>
   <string name="alertTitle_info">Informação</string>
+    <string name="cards">Cartões</string>
+  <string name="people">Pessoa</string>
+  <string name="card">Cartão</string>
 </resources>

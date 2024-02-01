@@ -19,6 +19,9 @@ import com.evandro.cards.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import java.util.List;
 
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
   private ActivityMainBinding binding;
   private List<String> cards;
   private CardDAO cardDAO;
+  final Globally globally = Globally.getInstance();
+  Spinner spCards, spPeople;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,30 @@ public class MainActivity extends AppCompatActivity {
 
     cardDAO = new CardDAO(this);
     cards = cardDAO.getAll();
+
+    spCards = findViewById(R.id.spCards);
+    spPeople = findViewById(R.id.spPeople);
+    fillScreen();
+  }
+
+  private void fillScreen() {
+    globally.init(this);
+
+    ArrayAdapter<String> cardAdapter = new ArrayAdapter<>(
+      this,
+      R.layout.item_spinner,
+      R.id.txtSpinner,
+      globally.getCards()
+    );
+    spCards.setAdapter(cardAdapter);
+
+    ArrayAdapter<String> personAdapter = new ArrayAdapter<>(
+      this,
+      R.layout.item_spinner,
+      R.id.txtSpinner,
+      globally.getPeople()
+    );
+    spPeople.setAdapter(personAdapter);
   }
 
   @Override
