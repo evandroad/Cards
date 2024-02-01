@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".FirstFragment">
+  
+  <RelativeLayout
+    android:id="@+id/rlDate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toTopOf="@+id/rlCardWe"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+    
+    <TableRow
+      android:id="@+id/row1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      
+      <TextView
+        android:id="@+id/tvMonthYear"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:textSize="20sp" />
+      
+      <Button
+        android:id="@+id/btnLessMonth"
+        android:layout_height="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="1.1"
+        android:paddingTop="12dp"
+        app:cornerRadius="25dp"
+        app:icon="@drawable/arrow_back"
+        app:iconGravity="textTop" />
+      
+      <Button
+        android:id="@+id/btnMoreMonth"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1.1"
+        android:paddingTop="12dp"
+        app:cornerRadius="25dp"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="textTop" />
+    
+    </TableRow>
+  
+    <TableRow
+      android:id="@+id/row2"
+      android:layout_below="@id/row1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+  
+      <Spinner
+        android:id="@+id/spCards"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp" />
+  
+      <Spinner
+        android:id="@+id/spPeople"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp" />
+      
+    </TableRow>
+    
+    <TableRow
+      android:id="@+id/row3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/row2"
+      android:layout_marginTop="10dp">
+      
+      <TextView
+        android:id="@+id/tvBalance"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="@string/tvBalance2p"
+        android:textSize="20sp"
+        tools:ignore="RtlHardcoded" />
+      
+      <TextView
+        android:id="@+id/txtBalance"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1"
+        android:textSize="20sp" />
+    
+    </TableRow>
+  
+  </RelativeLayout>
+  
+  <RelativeLayout
+    android:id="@+id/rlCardWe"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/rlDate">
+  
+    <TableRow
+      android:id="@+id/header01"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="5dp">
+      
+      <TextView
+        android:id="@+id/tvPerson"
+        android:layout_weight="1"
+        android:textColor="@color/gray"
+        android:text="@string/person"
+        android:gravity="center" />
+      
+      <TextView
+        android:id="@+id/tvValue"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:text="@string/valor" />
+      
+      <TextView
+        android:id="@+id/tvDescription"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:text="@string/description" />
+      
+      <TextView
+        android:id="@+id/tvInstallment"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:text="@string/installment" />
+      
+    </TableRow>
+    
+    <ListView
+      android:id="@+id/list"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/header01" />
+  
+  </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
