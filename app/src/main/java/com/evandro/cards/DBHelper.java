@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
   private static final String DATABASE_NAME = "data_cards.db";
+  public static final String TABLE_CARDS = "cards";
+  public static final String TABLE_PEOPLE = "people";
   private static final int DATABASE_VERSION = 1;
 
   public DBHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
@@ -24,10 +26,10 @@ public class DBHelper extends SQLiteOpenHelper {
         "person TEXT)";
     db.execSQL(createTableTransaction);
 
-    String createTableCards = "CREATE TABLE IF NOT EXISTS cards (card TEXT)";
+    String createTableCards = "CREATE TABLE IF NOT EXISTS " + TABLE_CARDS + " (card TEXT)";
     db.execSQL(createTableCards);
 
-    String createTablePeople = "CREATE TABLE IF NOT EXISTS people (person TEXT)";
+    String createTablePeople = "CREATE TABLE IF NOT EXISTS " + TABLE_PEOPLE + " (person TEXT)";
     db.execSQL(createTablePeople);
   }
 

@@ -6,6 +6,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -19,10 +20,14 @@ import com.evandro.cards.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
   private AppBarConfiguration appBarConfiguration;
   private ActivityMainBinding binding;
+  private List<String> cards;
+  private CardDAO cardDAO;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
     appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
     NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+    cardDAO = new CardDAO(this);
+    cards = cardDAO.getAll();
   }
 
   @Override
