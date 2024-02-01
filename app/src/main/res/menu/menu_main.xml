@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.evandro.cards.MainActivity">
+
+    <item
+        android:id="@+id/action_cards"
+        android:orderInCategory="100"
+        android:title="@string/action_cards"
+        app:showAsAction="never" />
+    
+    <item
+      android:id="@+id/action_people"
+      android:orderInCategory="100"
+      android:title="@string/action_people"
+      app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_insert"
+        android:icon="@android:drawable/ic_menu_add"
+        android:orderInCategory="100"
+        android:title="@string/action_insert"
+        app:showAsAction="ifRoom" />
+
+</menu>

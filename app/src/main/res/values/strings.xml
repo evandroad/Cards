@@ -1,0 +1,32 @@
+<resources>
+  <string name="app_name">Cards</string>
+  
+  <string name="action_cards">Cartões</string>
+  <string name="action_people">Pessoas</string>
+  <string name="action_insert">Inserir</string>
+  
+  <string name="first_fragment_label">First Fragment</string>
+  <string name="second_fragment_label">Second Fragment</string>
+  <string name="next">Next</string>
+  <string name="previous">Previous</string>
+  
+  <string name="hello_first_fragment">Hello first fragment</string>
+  <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+  <string name="tvBalance2p">Saldo:</string>
+  <string name="person">Pessoa</string>
+  <string name="valor">Valor</string>
+  <string name="description">Descrição</string>
+  <string name="installment">Parcelas</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="insert">Cadastrar</string>
+  <string name="card2p">Cartão:</string>
+  <string name="current_card2p">Cartão Atual:</string>
+  <string name="update">Alterar</string>
+  <string name="new_card2p">Cartão Novo:</string>
+  <string name="delete">Apagar</string>
+  <string name="btn_ok">OK</string>
+  <string name="alertTitle_success">Sucesso</string>
+  <string name="alertTitle_error">Erro!</string>
+  <string name="alertTitle_info">Informação</string>
+</resources>
