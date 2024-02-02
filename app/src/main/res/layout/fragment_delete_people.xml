@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".fragments.DeleteCardsFragment">
+  tools:context=".fragments.DeletePeopleFragment">
   
   <LinearLayout
     android:layout_width="wrap_content"
@@ -16,25 +16,25 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
-    
+  
     <TextView
-      android:id="@+id/tvCard"
+      android:id="@+id/tvPerson"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:layout_marginTop="8dp"
-      android:text="@string/card2p"
+      android:text="@string/person2p"
       android:textSize="18sp" />
     
     <Spinner
-      android:id="@+id/spCard"
+      android:id="@+id/spPerson"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
       android:background="@drawable/border" />
     
     <Button
-      android:id="@+id/btnDeleteCard"
+      android:id="@+id/btnDeletePerson"
       android:layout_width="match_parent"
       android:layout_height="50dp"
       android:layout_marginTop="40dp"

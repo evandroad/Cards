@@ -5,10 +5,11 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".SecondFragment">
+  tools:context=".FormCardActivity"
+  tools:ignore="MissingDefaultResource">
   
   <com.google.android.material.tabs.TabLayout
-    android:id="@+id/tabs"
+    android:id="@+id/tabsCard"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +18,7 @@
   </com.google.android.material.tabs.TabLayout>
   
   <androidx.viewpager2.widget.ViewPager2
-    android:id="@+id/viewpagerCommon"
+    android:id="@+id/viewpagerCard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 

@@ -1,4 +1,4 @@
-package com.evandro.cards;
+package com.evandro.cards.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,13 +9,14 @@ public class DBHelper extends SQLiteOpenHelper {
   private static final String DATABASE_NAME = "data_cards.db";
   public static final String TABLE_CARDS = "cards";
   public static final String TABLE_PEOPLE = "people";
+  public static final String TABLE_TRANSACTIONS = "transactions";
   private static final int DATABASE_VERSION = 1;
 
   public DBHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
 
   @Override
   public void onCreate(SQLiteDatabase db) {
-    String createTableTransaction = "CREATE TABLE IF NOT EXISTS transactions (" +
+    String createTableTransaction = "CREATE TABLE IF NOT EXISTS " + TABLE_TRANSACTIONS + " (" +
         "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
         "date DATE, " +
         "description TEXT, " +

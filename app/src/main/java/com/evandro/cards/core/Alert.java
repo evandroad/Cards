@@ -1,8 +1,10 @@
-package com.evandro.cards;
+package com.evandro.cards.core;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+
+import com.evandro.cards.R;
 
 public class Alert {
 

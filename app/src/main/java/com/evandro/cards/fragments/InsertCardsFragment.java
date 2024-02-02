@@ -1,4 +1,4 @@
-package com.evandro.cards;
+package com.evandro.cards.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.evandro.cards.core.Alert;
+import com.evandro.cards.dao.CardDAO;
+import com.evandro.cards.R;
 
 public class InsertCardsFragment extends Fragment {
 

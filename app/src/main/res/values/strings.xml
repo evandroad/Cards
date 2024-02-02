@@ -29,7 +29,11 @@
   <string name="alertTitle_success">Sucesso</string>
   <string name="alertTitle_error">Erro!</string>
   <string name="alertTitle_info">Informação</string>
-    <string name="cards">Cartões</string>
+  <string name="cards">Cartões</string>
   <string name="people">Pessoa</string>
   <string name="card">Cartão</string>
+  <string name="person2p">Pessoa:</string>
+  <string name="current_person2p">Pessoa Atual:</string>
+  <string name="new_person2p">Pessoa Nova:</string>
+  <string name="tvValor">valor</string>
 </resources>

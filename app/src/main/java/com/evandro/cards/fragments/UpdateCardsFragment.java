@@ -1,4 +1,4 @@
-package com.evandro.cards;
+package com.evandro.cards.fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.evandro.cards.R;
 
 public class UpdateCardsFragment extends Fragment {
 
