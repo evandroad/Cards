@@ -1,5 +1,6 @@
 package com.evandro.cards;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,19 +9,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.evandro.cards.core.Globally;
 import com.evandro.cards.core.MainAdapter;
+import com.evandro.cards.core.MyDate;
 import com.evandro.cards.core.Transaction;
-import com.evandro.cards.dao.CardDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
   final Globally globally = Globally.getInstance();
+  final MyDate myDate = MyDate.getInstance();
   Spinner spCards, spPeople;
   Activity activity;
 
@@ -37,7 +42,25 @@ public class MainActivity extends AppCompatActivity {
     fillScreen();
   }
 
+  private void date() {
+    TextView tvMonthYear = findViewById(R.id.tvMonthYear);
+    tvMonthYear.setText(myDate.getMonthYear());
+
+    Button btnLess = findViewById(R.id.btnLessMonth);
+    btnLess.setOnClickListener(v -> {
+      myDate.lessMonth();
+      fillScreen();
+    });
+
+    Button btnMore = findViewById(R.id.btnMoreMonth);
+    btnMore.setOnClickListener(v -> {
+      myDate.moreMonth();
+      fillScreen();
+    });
+  }
+
   private void fillScreen() {
+    date();
     globally.init(this);
 
     ArrayAdapter<String> cardAdapter = new ArrayAdapter<>(
@@ -56,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     );
     spPeople.setAdapter(personAdapter);
 
-    List<Transaction> transactions = null;
+    List<Transaction> transactions = new ArrayList<>();
     ListView list = findViewById(R.id.list);
     MainAdapter adapter;
     list.invalidateViews();
@@ -70,18 +93,24 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+  @SuppressLint("NonConstantResourceId")
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    int id = item.getItemId();
-
-    if (id == R.id.action_cards) {
-      intentTo(FormCardActivity.class);
-      return true;
-    }
-
-    if (id == R.id.action_people) {
-      intentTo(FormPersonActivity.class);
-      return true;
+    switch (item.getItemId()) {
+//      case R.id.itemUpdate:
+//        myDate.setToday();
+//        update();
+//        break;
+      case R.id.action_cards:
+//        BankActivity.myTitle = new MyTitle("Itaú", "Michelle");
+        intentTo(FormCardActivity.class);
+        break;
+      case R.id.action_people:
+//        BankActivity.myTitle = new MyTitle("Nubank", "Michelle");
+        intentTo(FormPersonActivity.class);
+        break;
+      case R.id.action_insert:
+        intentTo(FormTransactionActivity.class);
     }
 
     return super.onOptionsItemSelected(item);
