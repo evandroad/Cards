@@ -21,18 +21,21 @@ public class TransactionDAO {
     db = dbHelper.getWritableDatabase();
   }
 
+  @SuppressLint("Range")
   public List<Transaction> getAll() {
     List<Transaction> transactions = new ArrayList<>();
-    Cursor cursor = db.query(DBHelper.TABLE_CARDS, new String[]{"id", "date", "description", "value", "holder", "bank",
+    Cursor cursor = db.query(DBHelper.TABLE_TRANSACTIONS, new String[]{"id", "date", "description", "value", "holder", "card",
         "installment", "person"},
         null, null, null, null, null);
 
     while (cursor.moveToNext()) {
       Transaction t = new Transaction();
       t.setId(cursor.getInt(0));
-      @SuppressLint("Range") long dateMillis = cursor.getLong(cursor.getColumnIndex("date"));
-      Date date = new Date(dateMillis);
-      t.setDate(date);
+      t.setPerson(cursor.getString(cursor.getColumnIndex("person")));
+      t.setValue(cursor.getString(cursor.getColumnIndex("value")));
+      t.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+      t.setInstallment(cursor.getString(cursor.getColumnIndex("installment")));
+      t.setDate(new Date(cursor.getLong(cursor.getColumnIndex("date"))));
 
       transactions.add(t);
     }
@@ -40,9 +43,15 @@ public class TransactionDAO {
     return transactions;
   }
 
-  public void inserir(String card) {
+  public void inserir(Transaction t) {
     ContentValues values = new ContentValues();
-    values.put("card", card);
+    values.put("date", t.getDate().getTime());
+    values.put("person", t.getPerson());
+    values.put("description", t.getDescription());
+    values.put("value", t.getValue());
+    values.put("installment", t.getInstallment());
+    values.put("card", t.getCard());
+    values.put("holder", t.getHolder());
     db.insert(DBHelper.TABLE_TRANSACTIONS, null, values);
   }
 

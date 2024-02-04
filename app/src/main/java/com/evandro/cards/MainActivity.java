@@ -18,6 +18,7 @@ import com.evandro.cards.core.Globally;
 import com.evandro.cards.core.MainAdapter;
 import com.evandro.cards.core.MyDate;
 import com.evandro.cards.core.Transaction;
+import com.evandro.cards.dao.TransactionDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
   final MyDate myDate = MyDate.getInstance();
   Spinner spCards, spPeople;
   Activity activity;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
     );
     spPeople.setAdapter(personAdapter);
 
-    List<Transaction> transactions = new ArrayList<>();
     ListView list = findViewById(R.id.list);
     MainAdapter adapter;
     list.invalidateViews();
-    adapter = new MainAdapter(activity, transactions);
+    TransactionDAO transactionDAO = new TransactionDAO(this);
+    adapter = new MainAdapter(activity, transactionDAO.getAll());
     list.setAdapter(adapter);
   }
 
@@ -119,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
   public void intentTo(Class<?> activity) {
     Intent it = new Intent(this, activity).setAction("your.custom.action");
     startActivity(it);
+  }
+
+  @Override
+  public void onResume() {
+    fillScreen();
+    super.onResume();
   }
 
 }

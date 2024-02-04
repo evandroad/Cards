@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  
+  <item
+    android:id="@+id/action_cards"
+    android:orderInCategory="100"
+    android:title="@string/action_cards"
+    app:showAsAction="never" />
+  
+  <item
+    android:id="@+id/action_people"
+    android:orderInCategory="100"
+    android:title="@string/action_people"
+    app:showAsAction="never" />
+  
+  <item
+    android:id="@+id/action_descriptions"
+    android:orderInCategory="100"
+    android:title="@string/action_descriptions"
+    app:showAsAction="never" />
+  
+</menu>

@@ -5,6 +5,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,13 +33,13 @@ public class MyDate {
     );
   }
 
-  public List<String> getListDays() {
-    return Arrays.asList("", "01", "15");
-  }
+  public List<String> getListDays() { return Arrays.asList("", "01", "15"); }
 
   public void setToday() { dateTime = new DateTime(); }
 
   public String getSqlDate() { return dateTime.toString(sqlFormat); }
+
+  public Date getDate() { return dateTime.toDate(); }
 
   public String getMonthYear() {
     DateTimeFormatter myf = DateTimeFormat.forPattern("MMMM/Y")

@@ -10,4 +10,10 @@ public class Util {
     return result.toString();
   }
 
+  public static String moneyToString(String value) {
+    value = value.replace(".", "");
+    value = value.replace(",", ".");
+    return value;
+  }
+
 }

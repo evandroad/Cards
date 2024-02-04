@@ -1,34 +1,40 @@
 <resources>
-    <string name="app_name">Cards</string>
-
-    <string name="action_cards">Cartões</string>
-    <string name="action_people">Pessoas</string>
-    <string name="action_insert">Inserir</string>
-
-    <string name="tvBalance2p">Saldo:</string>
-    <string name="person">Pessoa</string>
-    <string name="valor">Valor</string>
-    <string name="description">Descrição</string>
-    <string name="installment">Parcelas</string>
-    <string name="insert">Cadastrar</string>
-    <string name="card2p">Cartão:</string>
-    <string name="current_card2p">Cartão Atual:</string>
-    <string name="update">Alterar</string>
-    <string name="new_card2p">Cartão Novo:</string>
-    <string name="delete">Apagar</string>
-    <string name="btn_ok">OK</string>
-    <string name="alertTitle_success">Sucesso</string>
-    <string name="alertTitle_error">Erro!</string>
-    <string name="alertTitle_info">Informação</string>
-    <string name="cards">Cartões</string>
-    <string name="people">Pessoa</string>
-    <string name="card">Cartão</string>
-    <string name="person2p">Pessoa:</string>
-    <string name="current_person2p">Pessoa Atual:</string>
-    <string name="new_person2p">Pessoa Nova:</string>
-    <string name="tvValor">valor</string>
-    <string name="description2p">Descrição:</string>
-    <string name="value2p">Valor:</string>
-    <string name="value_0_00">0,00</string>
-    <string name="installment2p">Parcela:</string>
+  <string name="app_name">Cards</string>
+  
+  <string name="action_cards">Cartões</string>
+  <string name="action_people">Pessoas</string>
+  <string name="action_insert">Inserir</string>
+  
+  <string name="tvBalance2p">Saldo:</string>
+  <string name="person">Pessoa</string>
+  <string name="valor">Valor</string>
+  <string name="description">Descrição</string>
+  <string name="installment">Parcelas</string>
+  <string name="insert">Cadastrar</string>
+  <string name="card2p">Cartão:</string>
+  <string name="current_card2p">Cartão Atual:</string>
+  <string name="update">Alterar</string>
+  <string name="new_card2p">Cartão Novo:</string>
+  <string name="delete">Apagar</string>
+  <string name="btn_ok">OK</string>
+  <string name="alertTitle_success">Sucesso</string>
+  <string name="alertTitle_error">Erro!</string>
+  <string name="alertTitle_info">Informação</string>
+  <string name="cards">Cartões</string>
+  <string name="people">Pessoa</string>
+  <string name="card">Cartão</string>
+  <string name="person2p">Pessoa:</string>
+  <string name="current_person2p">Pessoa Atual:</string>
+  <string name="new_person2p">Pessoa Nova:</string>
+  <string name="tvValor">valor</string>
+  <string name="description2p">Descrição:</string>
+  <string name="value2p">Valor:</string>
+  <string name="value_0_00">0,00</string>
+  <string name="installment2p">Parcela:</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="action_descriptions">Descrições</string>
+  <string name="current_Description2p">Descrição Atual:</string>
+  <string name="new_Description2p">Descrição Nova:</string>
+  <string name="holder2p">Titular:</string>
 </resources>

@@ -1,102 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".FormTransactionActivity">
+  
+  <TableRow
+    android:id="@+id/row1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FormTransactionActivity">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            android:text="@string/description2p" />
-
-        <Spinner
-            android:id="@+id/spDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvPerson"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            android:text="@string/person2p" />
-
-        <Spinner
-            android:id="@+id/spPerson"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvValue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            android:text="@string/value2p" />
-
-        <EditText
-            android:id="@+id/txtValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="date"
-            android:textColor="@color/gray"
-            android:hint="@string/value_0_00" />
-
-        <TextView
-            android:id="@+id/tvInstallment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            android:text="@string/installment2p" />
-
-        <EditText
-            android:id="@+id/txtInstallment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="date"
-            android:textColor="@color/gray" />
-
-        <Button
-            android:id="@+id/btnInsertTransaction"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/insert"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:cornerRadius="25dp"/>
-
-    </LinearLayout>
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+    
+    <TextView
+      android:id="@+id/tvMonthYear"
+      android:layout_gravity="center"
+      android:layout_marginEnd="10dp"
+      android:layout_weight="0.7"
+      android:gravity="center"
+      android:textSize="20sp" />
+    
+    <Button
+      android:id="@+id/btnLessMonth"
+      android:layout_height="50dp"
+      android:layout_marginEnd="5dp"
+      android:layout_weight="1.1"
+      android:paddingTop="12dp"
+      app:cornerRadius="25dp"
+      app:icon="@drawable/arrow_back"
+      app:iconGravity="textTop" />
+    
+    <Button
+      android:id="@+id/btnMoreMonth"
+      android:layout_height="50dp"
+      android:layout_marginStart="5dp"
+      android:layout_weight="1.1"
+      android:paddingTop="12dp"
+      app:cornerRadius="25dp"
+      app:icon="@drawable/arrow_forward"
+      app:iconGravity="textTop" />
+  
+  </TableRow>
+  
+  <LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/row1">
+    
+    <TextView
+      android:id="@+id/tvDescription"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"
+      android:text="@string/description2p"
+      android:textSize="18sp" />
+    
+    <Spinner
+      android:id="@+id/spDescription"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="-10dp"
+      android:background="@drawable/border" />
+    
+    <TextView
+      android:id="@+id/tvPerson"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"
+      android:text="@string/person2p"
+      android:textSize="18sp" />
+    
+    <Spinner
+      android:id="@+id/spPerson"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="-10dp"
+      android:background="@drawable/border" />
+    
+    <TextView
+      android:id="@+id/tvValue"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"
+      android:text="@string/value2p"
+      android:textSize="18sp" />
+    
+    <EditText
+      android:id="@+id/txtValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="-10dp"
+      android:ems="10"
+      android:hint="@string/value_0_00"
+      android:inputType="date"
+      android:textColor="@color/gray"
+      android:textSize="18sp" />
+    
+    <TextView
+      android:id="@+id/tvInstallment"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"
+      android:text="@string/installment2p"
+      android:textSize="18sp" />
+    
+    <EditText
+      android:id="@+id/txtInstallment"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="-10dp"
+      android:ems="10"
+      android:inputType="date"
+      android:textColor="@color/gray"
+      android:textSize="18sp" />
+  
+    <TextView
+      android:id="@+id/tvCard"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"
+      android:text="@string/card2p"
+      android:textSize="18sp" />
+  
+    <Spinner
+      android:id="@+id/spCard"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="-10dp"
+      android:background="@drawable/border" />
+  
+    <TextView
+      android:id="@+id/tvHolder"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"
+      android:text="@string/holder2p"
+      android:textSize="18sp" />
+  
+    <Spinner
+      android:id="@+id/spHolder"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="-10dp"
+      android:background="@drawable/border" />
+    
+    <Button
+      android:id="@+id/btnInsertTransaction"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginTop="40dp"
+      android:text="@string/insert"
+      android:textColor="@color/white"
+      android:textSize="18sp"
+      app:cornerRadius="25dp" />
+  
+  </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
