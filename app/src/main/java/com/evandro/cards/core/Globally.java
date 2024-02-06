@@ -15,9 +15,9 @@ import java.util.List;
 public class Globally {
 
   private static Globally instance = null;
-  private static final String CARD = "card";
-  private static final String PERSON = "person";
-  private static final String DESCRIPTION = "description";
+  public static final String CARD = "card";
+  public static final String PERSON = "person";
+  public static final String DESCRIPTION = "description";
 
   private List<String> cards;
   private List<String> people;
@@ -117,14 +117,7 @@ public class Globally {
         list = getDescriptions();
     }
 
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(
-      context,
-      R.layout.item_spinner,
-      R.id.txtSpinner,
-      list
-    );
-
-    spinner.setAdapter(adapter);
+    Util.fillSpinner(context, list, spinner);
   }
 
   public List<String> getCards() { return cards; }

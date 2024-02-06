@@ -1,12 +1,15 @@
 package com.evandro.cards;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
 import com.evandro.cards.core.TabsAdapterCards;
+import com.evandro.cards.fragments.DeleteCardsFragment;
 import com.evandro.cards.fragments.InsertCardsFragment;
+import com.evandro.cards.fragments.UpdateCardsFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -43,26 +46,15 @@ public class FormCardActivity extends AppCompatActivity {
       public void onPageSelected(int position) {
         super.onPageSelected(position);
 
-        if (position == 0) {
-          InsertCardsFragment insertFragment =
-            (InsertCardsFragment) tabsAdapterCards.createFragment(position);
-          insertFragment.onFragmentVisible();
-        } else if (position == 1) {
-          TabsAdapterCards.AlterarFragment alterarFragment =
-            (TabsAdapterCards.AlterarFragment) tabsAdapterCards.createFragment(position);
-          if (alterarFragment != null) {
-            alterarFragment.onFragmentVisible();
-          }
-        } else if (position == 2) {
-          TabsAdapterCards.ApagarFragment apagarFragment =
-            (TabsAdapterCards.ApagarFragment) tabsAdapterCards.createFragment(position);
-          if (apagarFragment != null) {
-            apagarFragment.onFragmentVisible();
-          }
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("f" + position);
+
+        if (fragment instanceof UpdateCardsFragment) {
+          ((UpdateCardsFragment) fragment).onFragmentVisible();
+        } else if (fragment instanceof DeleteCardsFragment) {
+          ((DeleteCardsFragment) fragment).onFragmentVisible();
         }
       }
     });
   }
-
 
 }

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.evandro.cards.core.Alert;
 import com.evandro.cards.core.Globally;
+import com.evandro.cards.core.MoneyTextWatcher;
 import com.evandro.cards.core.MyDate;
 import com.evandro.cards.core.Transaction;
 import com.evandro.cards.core.Util;
@@ -53,12 +54,12 @@ public class FormTransactionActivity extends AppCompatActivity {
 
 //    setTitle(CardActivity.myTitle.toString());
 
-//    txtValue.addTextChangedListener(new MoneyTextWatcher(txtValue));
+    txtValue.addTextChangedListener(new MoneyTextWatcher(txtValue));
 
-    fillSpinner(globally.getDescriptions(), spDescription);
-    fillSpinner(globally.getPeople(), spPerson);
-    fillSpinner(globally.getCards(), spCard);
-    fillSpinner(globally.getPeople(), spHolder);
+    Util.fillSpinner(this, globally.getDescriptions(), spDescription);
+    Util.fillSpinner(this, globally.getPeople(), spPerson);
+    Util.fillSpinner(this, globally.getCards(), spCard);
+    Util.fillSpinner(this, globally.getPeople(), spHolder);
 
     date();
 
@@ -158,15 +159,6 @@ public class FormTransactionActivity extends AppCompatActivity {
     }
 
     return false;
-  }
-
-  private void fillSpinner(List<String> list, Spinner spinner) {
-    if (list == null) {
-      return;
-    }
-
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.item_spinner, R.id.txtSpinner, list);
-    spinner.setAdapter(adapter);
   }
 
 }

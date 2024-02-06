@@ -1,5 +1,6 @@
 package com.evandro.cards.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,17 +15,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.evandro.cards.R;
+import com.evandro.cards.core.Alert;
 import com.evandro.cards.core.Globally;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.evandro.cards.core.Util;
+import com.evandro.cards.dao.CardDAO;
 
 public class UpdateCardsFragment extends Fragment {
 
   Spinner spCurrentCard;
   EditText txtNewCard;
-  private boolean isVisibleToUser;
+  ProgressDialog progressDialog;
+  CardDAO cardDAO;
   Globally globally = Globally.getInstance();
 
   public UpdateCardsFragment() {}
@@ -36,52 +37,50 @@ public class UpdateCardsFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_update_cards, container, false);
 
+    cardDAO = new CardDAO(requireContext());
     spCurrentCard = view.findViewById(R.id.spCurrentCard);
     txtNewCard = view.findViewById(R.id.txtNewCard);
     Button btnUpdateCard = view.findViewById(R.id.btnUpdateCard);
 
-//    txtValue.addTextChangedListener(new MoneyTextWatcher(txtValue));
-
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(
-      getContext(),
-      R.layout.item_spinner,
-      R.id.txtSpinner,
-      globally.getCards()
-    );
-    spCurrentCard.setAdapter(adapter);
-
-    btnUpdateCard.setOnClickListener(v -> crud());
+    Util.fillSpinner(getContext(), globally.getCards(), spCurrentCard);
+    btnUpdateCard.setOnClickListener(v -> update());
+    globally.getListFromDB(Globally.CARD, null, getContext());
 
     return view;
   }
 
-  private void crud() {
-
-  }
-
-  @Override
-  public void setUserVisibleHint(boolean isVisibleToUser) {
-    super.setUserVisibleHint(isVisibleToUser);
-
-    this.isVisibleToUser = isVisibleToUser;
-
-    if (isVisibleToUser) {
-//      onFragmentVisible();
-      Log.i("Evandro", "Está visivel");
-    } else {
-      Log.i("Evandro", "NÃO está visivel");
+  private void update() {
+    if (checkFields()) {
+      return;
     }
+
+    progressDialog = Alert.alertLoading(getContext());
+    progressDialog.show();
+
+    cardDAO.update(spCurrentCard.getSelectedItem().toString(), txtNewCard.getText().toString());
+    progressDialog.dismiss();
+    Alert.alertSuccess(getContext(), "Cartão alterado com sucesso").show();
+    globally.getListFromDB(Globally.CARD, spCurrentCard, requireContext());
+
+    spCurrentCard.setSelection(0);
+    txtNewCard.setText("");
+    txtNewCard.clearFocus();
   }
 
-  @Override
-  public void onHiddenChanged(boolean hidden) {
-    super.onHiddenChanged(hidden);
-
-    if (!hidden) {
-      Log.i("Evandro", "Está visivel");
-    } else {
-      Log.i("Evandro", "NÃO está visivel");
+  private boolean checkFields() {
+    if (spCurrentCard.getSelectedItem().toString().isEmpty()) {
+      Alert.alertInfo(getContext(), "Selecione um cartão.").show();
+      return true;
     }
+
+    if (txtNewCard.getText().toString().isEmpty()) {
+      Alert.alertInfo(getContext(), "Preencha o cartão.").show();
+      return true;
+    }
+
+    return false;
   }
+
+  public void onFragmentVisible() { Util.fillSpinner(requireContext(), globally.getCards(), spCurrentCard); }
 
 }

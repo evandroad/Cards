@@ -29,10 +29,21 @@ public class CardDAO {
     return cards;
   }
 
-  public void inserir(String card) {
+  public void insert(String card) {
     ContentValues values = new ContentValues();
     values.put("card", card);
     db.insert(DBHelper.TABLE_CARDS, null, values);
+  }
+
+  public void update(String currentCard, String newCard) {
+    ContentValues values = new ContentValues();
+    values.put("card", newCard);
+    db.update(DBHelper.TABLE_CARDS, values, "card=?", new String[]{currentCard});
+  }
+
+
+  public void delete(String card) {
+    db.delete(DBHelper.TABLE_CARDS, "card=?", new String[]{card});
   }
 
 }

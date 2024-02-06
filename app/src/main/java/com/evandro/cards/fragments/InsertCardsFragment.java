@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.evandro.cards.core.Alert;
+import com.evandro.cards.core.Globally;
 import com.evandro.cards.dao.CardDAO;
 import com.evandro.cards.R;
 
@@ -21,6 +21,7 @@ public class InsertCardsFragment extends Fragment {
   EditText txtCard;
   ProgressDialog progressDialog;
   CardDAO cardDAO;
+  Globally globally = Globally.getInstance();
 
   public InsertCardsFragment() {}
 
@@ -48,9 +49,10 @@ public class InsertCardsFragment extends Fragment {
     progressDialog = Alert.alertLoading(getContext());
     progressDialog.show();
 
-    cardDAO.inserir(txtCard.getText().toString());
+    cardDAO.insert(txtCard.getText().toString());
     progressDialog.dismiss();
     Alert.alertSuccess(getContext(), "Cartão inserido com sucesso").show();
+    globally.getListFromDB(Globally.CARD, null, getContext());
 
     txtCard.setText("");
     txtCard.requestFocus();
@@ -65,7 +67,4 @@ public class InsertCardsFragment extends Fragment {
     return false;
   }
 
-  public void onFragmentVisible() {
-    Log.i("Evandro", "Está visivel");
-  }
 }
