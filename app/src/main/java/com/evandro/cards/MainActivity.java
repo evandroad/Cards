@@ -19,8 +19,6 @@ import com.evandro.cards.core.MyDate;
 import com.evandro.cards.core.Util;
 import com.evandro.cards.dao.TransactionDAO;
 
-import java.util.Date;
-
 public class MainActivity extends AppCompatActivity {
 
   final Globally globally = Globally.getInstance();
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     date();
     globally.init(this);
 
-    Util.fillSpinner(this, globally.getCards(), spCards);
+    Util.fillSpinner(this, globally.getCardsHolder(), spCards);
     Util.fillSpinner(this, globally.getPeople(), spPeople);
 
     ListView list = findViewById(R.id.list);

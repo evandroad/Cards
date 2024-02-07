@@ -1,10 +1,8 @@
 package com.evandro.cards.core;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.evandro.cards.R;
 import com.evandro.cards.dao.CardDAO;
 import com.evandro.cards.dao.DescriptionDAO;
 import com.evandro.cards.dao.PersonDAO;
@@ -16,10 +14,12 @@ public class Globally {
 
   private static Globally instance = null;
   public static final String CARD = "card";
+  public static final String CARD_HOLDER = "card_holder";
   public static final String PERSON = "person";
   public static final String DESCRIPTION = "description";
 
   private List<String> cards;
+  private List<String> cards_holder;
   private List<String> people;
   private List<String> descriptions;
   CardDAO cardDAO;
@@ -45,6 +45,10 @@ public class Globally {
       getListFromDB(CARD, null, null);
     }
 
+    if (cards_holder == null || cards_holder.size() == 1) {
+      getListFromDB(CARD_HOLDER, null, null);
+    }
+
     if (people == null || people.size() == 1) {
       getListFromDB(PERSON, null, null);
     }
@@ -60,6 +64,9 @@ public class Globally {
 
     switch (operation) {
       case CARD:
+        list.addAll(cardDAO.getCards());
+        break;
+      case CARD_HOLDER:
         list.addAll(cardDAO.getAll());
         break;
       case PERSON:
@@ -73,23 +80,13 @@ public class Globally {
     fillSpinner(operation, spinner, context);
   }
 
-  public List<String> getList(String operation) {
-    switch (operation) {
-      case CARD:
-        return this.getCards();
-      case PERSON:
-        return this.getPeople();
-      case DESCRIPTION:
-        return this.getDescriptions();
-      default:
-        return null;
-    }
-  }
-
   public void setList(String operation, List<String> list) {
     switch (operation) {
       case CARD:
         this.setCards(list);
+        break;
+      case CARD_HOLDER:
+        this.setCardsHolder(list);
         break;
       case PERSON:
         this.setPeople(list);
@@ -110,6 +107,9 @@ public class Globally {
       case CARD:
         list = getCards();
         break;
+      case CARD_HOLDER:
+        list = getCardsHolder();
+        break;
       case PERSON:
         list = getPeople();
         break;
@@ -122,6 +122,9 @@ public class Globally {
 
   public List<String> getCards() { return cards; }
   public void setCards(List<String> cards) { this.cards = cards; }
+
+  public List<String> getCardsHolder() { return cards_holder; }
+  public void setCardsHolder(List<String> cards_holder) { this.cards_holder = cards_holder; }
 
   public List<String> getPeople() { return people; }
   public void setPeople(List<String> people) { this.people = people; }
