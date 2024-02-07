@@ -35,4 +35,14 @@ public class DescriptionDAO {
     db.insert(DBHelper.TABLE_DESCRIPTIONS, null, values);
   }
 
+  public void update(String currentDescription, String newDescription) {
+    ContentValues values = new ContentValues();
+    values.put("description", newDescription);
+    db.update(DBHelper.TABLE_DESCRIPTIONS, values, "description=?", new String[]{currentDescription});
+  }
+
+  public void delete(String description) {
+    db.delete(DBHelper.TABLE_DESCRIPTIONS, "description=?", new String[]{description});
+  }
+
 }

@@ -1,5 +1,6 @@
 package com.evandro.cards.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,60 +8,67 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import com.evandro.cards.R;
+import com.evandro.cards.core.Alert;
+import com.evandro.cards.core.Globally;
+import com.evandro.cards.core.Util;
+import com.evandro.cards.dao.DescriptionDAO;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DeleteDescriptionsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DeleteDescriptionsFragment extends Fragment {
 
-  // TODO: Rename parameter arguments, choose names that match
-  // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-  private static final String ARG_PARAM1 = "param1";
-  private static final String ARG_PARAM2 = "param2";
+  Spinner spDescription;
+  ProgressDialog progressDialog;
+  DescriptionDAO descriptionDAO;
+  Globally globally = Globally.getInstance();
 
-  // TODO: Rename and change types of parameters
-  private String mParam1;
-  private String mParam2;
-
-  public DeleteDescriptionsFragment() {
-    // Required empty public constructor
-  }
-
-  /**
-   * Use this factory method to create a new instance of
-   * this fragment using the provided parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment DeleteDescriptionsFragment.
-   */
-  // TODO: Rename and change types and number of parameters
-  public static DeleteDescriptionsFragment newInstance(String param1, String param2) {
-    DeleteDescriptionsFragment fragment = new DeleteDescriptionsFragment();
-    Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
-    args.putString(ARG_PARAM2, param2);
-    fragment.setArguments(args);
-    return fragment;
-  }
+  public DeleteDescriptionsFragment() {}
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (getArguments() != null) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
+  public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_delete_descriptions, container, false);
+
+    descriptionDAO = new DescriptionDAO(requireContext());
+    spDescription = view.findViewById(R.id.spDescription);
+    Button btnDeleteDescription = view.findViewById(R.id.btnDeleteDescription);
+
+    Util.fillSpinner(requireContext(), globally.getDescriptions(), spDescription);
+    btnDeleteDescription.setOnClickListener(v -> delete());
+
+    return view;
+  }
+
+  private void delete() {
+    if (checkFields()) {
+      return;
     }
+
+    progressDialog = Alert.alertLoading(getContext());
+    progressDialog.show();
+
+    descriptionDAO.delete(spDescription.getSelectedItem().toString());
+    progressDialog.dismiss();
+    Alert.alertSuccess(getContext(), "Cartão apagado com sucesso").show();
+    globally.getListFromDB(Globally.DESCRIPTION, spDescription, requireContext());
+
+    spDescription.setSelection(0);
+    spDescription.requestFocus();
   }
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_delete_descriptions, container, false);
+  private boolean checkFields() {
+    if (spDescription.getSelectedItem().toString().isEmpty()) {
+      Alert.alertInfo(getContext(), "Selecione uma descrição.").show();
+      return true;
+    }
+
+    return false;
   }
+
+  public void onFragmentVisible() { Util.fillSpinner(requireContext(), globally.getDescriptions(), spDescription); }
+
 }

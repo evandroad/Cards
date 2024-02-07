@@ -41,9 +41,6 @@ public class CardDAO {
     db.update(DBHelper.TABLE_CARDS, values, "card=?", new String[]{currentCard});
   }
 
-
-  public void delete(String card) {
-    db.delete(DBHelper.TABLE_CARDS, "card=?", new String[]{card});
-  }
+  public void delete(String card) { db.delete(DBHelper.TABLE_CARDS, "card=?", new String[]{card}); }
 
 }

@@ -52,7 +52,7 @@ public class InsertCardsFragment extends Fragment {
     cardDAO.insert(txtCard.getText().toString());
     progressDialog.dismiss();
     Alert.alertSuccess(getContext(), "Cartão inserido com sucesso").show();
-    globally.getListFromDB(Globally.CARD, null, getContext());
+    globally.getListFromDB(Globally.CARD, null, requireContext());
 
     txtCard.setText("");
     txtCard.requestFocus();

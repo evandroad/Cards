@@ -5,12 +5,10 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.evandro.cards.R;
@@ -37,10 +35,10 @@ public class DeleteCardsFragment extends Fragment {
 
     cardDAO = new CardDAO(requireContext());
     spCard = view.findViewById(R.id.spCard);
-    Button btnUpdateCard = view.findViewById(R.id.btnDeleteCard);
+    Button btnDeleteCard = view.findViewById(R.id.btnDeleteCard);
 
-    Util.fillSpinner(getContext(), globally.getCards(), spCard);
-    btnUpdateCard.setOnClickListener(v -> delete());
+    Util.fillSpinner(requireContext(), globally.getCards(), spCard);
+    btnDeleteCard.setOnClickListener(v -> delete());
 
     return view;
   }
