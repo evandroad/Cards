@@ -49,7 +49,7 @@ public class InsertDescriptionsFragment extends Fragment {
     progressDialog = Alert.alertLoading(getContext());
     progressDialog.show();
 
-    descriptionDAO.inserir(txtDescription.getText().toString());
+    descriptionDAO.insert(txtDescription.getText().toString());
     progressDialog.dismiss();
     Alert.alertSuccess(getContext(), "Descrição inserida com sucesso").show();
     globally.getListFromDB(Globally.DESCRIPTION, null, requireContext());

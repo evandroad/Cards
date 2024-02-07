@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 import com.evandro.cards.R;
 import com.evandro.cards.core.Alert;
-import com.evandro.cards.dao.CardDAO;
+import com.evandro.cards.core.Globally;
 import com.evandro.cards.dao.PersonDAO;
 
 public class InsertPeopleFragment extends Fragment {
@@ -21,6 +21,7 @@ public class InsertPeopleFragment extends Fragment {
   EditText txtPerson;
   ProgressDialog progressDialog;
   PersonDAO personDAO;
+  Globally globally = Globally.getInstance();
 
   public InsertPeopleFragment() {}
 
@@ -48,9 +49,10 @@ public class InsertPeopleFragment extends Fragment {
     progressDialog = Alert.alertLoading(getContext());
     progressDialog.show();
 
-    personDAO.inserir(txtPerson.getText().toString());
+    personDAO.insert(txtPerson.getText().toString());
     progressDialog.dismiss();
     Alert.alertSuccess(getContext(), "Pessoa inserida com sucesso").show();
+    globally.getListFromDB(Globally.PERSON, null, requireContext());
 
     txtPerson.setText("");
     txtPerson.requestFocus();

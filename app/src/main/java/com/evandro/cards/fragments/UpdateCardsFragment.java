@@ -57,7 +57,7 @@ public class UpdateCardsFragment extends Fragment {
 
     cardDAO.update(spCurrentCard.getSelectedItem().toString(), txtNewCard.getText().toString());
     progressDialog.dismiss();
-    Alert.alertSuccess(getContext(), "Cartão alterado com sucesso").show();
+    Alert.alertSuccess(requireContext(), "Cartão alterado com sucesso").show();
     globally.getListFromDB(Globally.CARD, spCurrentCard, requireContext());
 
     spCurrentCard.setSelection(0);

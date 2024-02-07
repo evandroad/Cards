@@ -1,5 +1,6 @@
 package com.evandro.cards.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,60 +8,77 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.evandro.cards.R;
+import com.evandro.cards.core.Alert;
+import com.evandro.cards.core.Globally;
+import com.evandro.cards.core.Util;
+import com.evandro.cards.dao.PersonDAO;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UpdatePeopleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class UpdatePeopleFragment extends Fragment {
 
-  // TODO: Rename parameter arguments, choose names that match
-  // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-  private static final String ARG_PARAM1 = "param1";
-  private static final String ARG_PARAM2 = "param2";
+  Spinner spCurrentPerson;
+  EditText txtNewPerson;
+  ProgressDialog progressDialog;
+  PersonDAO personDAO;
+  Globally globally = Globally.getInstance();
 
-  // TODO: Rename and change types of parameters
-  private String mParam1;
-  private String mParam2;
-
-  public UpdatePeopleFragment() {
-    // Required empty public constructor
-  }
-
-  /**
-   * Use this factory method to create a new instance of
-   * this fragment using the provided parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment UpdatePeopleFragment.
-   */
-  // TODO: Rename and change types and number of parameters
-  public static UpdatePeopleFragment newInstance(String param1, String param2) {
-    UpdatePeopleFragment fragment = new UpdatePeopleFragment();
-    Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
-    args.putString(ARG_PARAM2, param2);
-    fragment.setArguments(args);
-    return fragment;
-  }
+  public UpdatePeopleFragment() {}
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (getArguments() != null) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
+  public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_update_people, container, false);
+
+    personDAO = new PersonDAO(requireContext());
+    spCurrentPerson = view.findViewById(R.id.spCurrentPerson);
+    txtNewPerson = view.findViewById(R.id.txtNewPerson);
+    Button btnUpdatePerson = view.findViewById(R.id.btnUpdatePerson);
+
+    Util.fillSpinner(requireContext(), globally.getPeople(), spCurrentPerson);
+    btnUpdatePerson.setOnClickListener(v -> update());
+    globally.getListFromDB(Globally.PERSON, null, getContext());
+
+    return view;
+  }
+
+  private void update() {
+    if (checkFields()) {
+      return;
     }
+
+    progressDialog = Alert.alertLoading(getContext());
+    progressDialog.show();
+
+    personDAO.update(spCurrentPerson.getSelectedItem().toString(), txtNewPerson.getText().toString());
+    progressDialog.dismiss();
+    Alert.alertSuccess(requireContext(), "Pessoa alterada com sucesso").show();
+    globally.getListFromDB(Globally.PERSON, spCurrentPerson, requireContext());
+
+    spCurrentPerson.setSelection(0);
+    txtNewPerson.setText("");
+    txtNewPerson.clearFocus();
   }
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_update_people, container, false);
+  private boolean checkFields() {
+    if (spCurrentPerson.getSelectedItem().toString().isEmpty()) {
+      Alert.alertInfo(getContext(), "Selecione um cartão.").show();
+      return true;
+    }
+
+    if (txtNewPerson.getText().toString().isEmpty()) {
+      Alert.alertInfo(getContext(), "Preencha o cartão.").show();
+      return true;
+    }
+
+    return false;
   }
+
+  public void onFragmentVisible() { Util.fillSpinner(requireContext(), globally.getPeople(), spCurrentPerson); }
+
 }

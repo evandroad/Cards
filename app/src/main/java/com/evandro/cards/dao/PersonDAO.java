@@ -31,10 +31,18 @@ public class PersonDAO {
     return people;
   }
 
-  public void inserir(String person) {
+  public void insert(String person) {
     ContentValues values = new ContentValues();
     values.put("person", person);
     db.insert(DBHelper.TABLE_PEOPLE, null, values);
   }
+
+  public void update(String currentPerson, String newPerson) {
+    ContentValues values = new ContentValues();
+    values.put("person", newPerson);
+    db.update(DBHelper.TABLE_PEOPLE, values, "person=?", new String[]{currentPerson});
+  }
+
+  public void delete(String person) { db.delete(DBHelper.TABLE_PEOPLE, "person=?", new String[]{person}); }
 
 }

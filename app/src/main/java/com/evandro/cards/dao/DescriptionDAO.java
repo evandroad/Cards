@@ -29,7 +29,7 @@ public class DescriptionDAO {
     return description;
   }
 
-  public void inserir(String description) {
+  public void insert(String description) {
     ContentValues values = new ContentValues();
     values.put("description", description);
     db.insert(DBHelper.TABLE_DESCRIPTIONS, null, values);
