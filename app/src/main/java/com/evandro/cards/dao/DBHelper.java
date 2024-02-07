@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
         "person TEXT)";
     db.execSQL(createTableTransaction);
 
-    String createTableCards = "CREATE TABLE IF NOT EXISTS " + TABLE_CARDS + " (card TEXT)";
+    String createTableCards = "CREATE TABLE IF NOT EXISTS " + TABLE_CARDS + " (card TEXT, holder TEXT)";
     db.execSQL(createTableCards);
 
     String createTablePeople = "CREATE TABLE IF NOT EXISTS " + TABLE_PEOPLE + " (person TEXT)";

@@ -18,7 +18,7 @@ import com.evandro.cards.R;
 
 public class InsertCardsFragment extends Fragment {
 
-  EditText txtCard;
+  EditText txtCard, txtHolder;
   ProgressDialog progressDialog;
   CardDAO cardDAO;
   Globally globally = Globally.getInstance();
@@ -34,6 +34,7 @@ public class InsertCardsFragment extends Fragment {
 
     cardDAO = new CardDAO(requireContext());
     txtCard = view.findViewById(R.id.txtCard);
+    txtHolder = view.findViewById(R.id.txtHolder);
     Button btnInsert = view.findViewById(R.id.btnInsertCard);
 
     btnInsert.setOnClickListener(v -> insert());
@@ -49,18 +50,24 @@ public class InsertCardsFragment extends Fragment {
     progressDialog = Alert.alertLoading(getContext());
     progressDialog.show();
 
-    cardDAO.insert(txtCard.getText().toString());
+    cardDAO.insert(txtCard.getText().toString(), txtHolder.getText().toString());
     progressDialog.dismiss();
     Alert.alertSuccess(getContext(), "Cartão inserido com sucesso").show();
     globally.getListFromDB(Globally.CARD, null, requireContext());
 
     txtCard.setText("");
     txtCard.requestFocus();
+    txtHolder.setText("");
   }
 
   private boolean checkFields() {
     if (txtCard.getText().toString().isEmpty()) {
       Alert.alertInfo(getContext(), "Preencha o cartão.").show();
+      return true;
+    }
+
+    if (txtHolder.getText().toString().isEmpty()) {
+      Alert.alertInfo(getContext(), "Preencha o titular.").show();
       return true;
     }
 

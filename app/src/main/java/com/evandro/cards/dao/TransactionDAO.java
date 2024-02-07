@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.evandro.cards.core.Transaction;
 
+import org.joda.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,11 +24,23 @@ public class TransactionDAO {
   }
 
   @SuppressLint("Range")
-  public List<Transaction> getAll() {
+  public List<Transaction> getByMonth(Date startDate) {
     List<Transaction> transactions = new ArrayList<>();
-    Cursor cursor = db.query(DBHelper.TABLE_TRANSACTIONS, new String[]{"id", "date", "description", "value", "holder", "card",
-        "installment", "person"},
-        null, null, null, null, null);
+    long startTimestamp = startDate.getTime();
+
+    LocalDate localDate = new LocalDate(startDate);
+    LocalDate endDate = localDate.dayOfMonth().withMaximumValue();
+    long endTimestamp = endDate.toDateTimeAtStartOfDay().getMillis();
+
+    Cursor cursor = db.query(
+      DBHelper.TABLE_TRANSACTIONS,
+      new String[]{"id", "date", "description", "value", "holder", "card", "installment", "person"},
+      "date BETWEEN ? AND ?",
+      new String[]{String.valueOf(startTimestamp), String.valueOf(endTimestamp)},
+      null,
+      null,
+      null
+    );
 
     while (cursor.moveToNext()) {
       Transaction t = new Transaction();

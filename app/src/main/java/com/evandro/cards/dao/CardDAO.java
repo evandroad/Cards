@@ -19,19 +19,20 @@ public class CardDAO {
 
   public List<String> getAll() {
     List<String> cards = new ArrayList<>();
-    Cursor cursor = db.query(DBHelper.TABLE_CARDS, new String[]{"card"},
+    Cursor cursor = db.query(DBHelper.TABLE_CARDS, new String[]{"card", "holder"},
         null, null, null, null, null);
 
     while (cursor.moveToNext()) {
-      cards.add(cursor.getString(0));
+      cards.add(cursor.getString(0) + " " + cursor.getString(1));
     }
 
     return cards;
   }
 
-  public void insert(String card) {
+  public void insert(String card, String holder) {
     ContentValues values = new ContentValues();
     values.put("card", card);
+    values.put("holder", holder);
     db.insert(DBHelper.TABLE_CARDS, null, values);
   }
 

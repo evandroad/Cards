@@ -91,10 +91,6 @@ public class MyDate {
     return Util.firstLetterUppercase(dateTime.toString(df));
   }
 
-  public void moreDay() { dateTime = dateTime.plusDays(1); }
-
-  public void lessDay() { dateTime = dateTime.minusDays(1); }
-
   public void moreMonth() { dateTime = dateTime.plusMonths(1); }
 
   public void lessMonth() { dateTime = dateTime.minusMonths(1); }

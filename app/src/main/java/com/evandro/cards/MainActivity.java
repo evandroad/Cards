@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -17,11 +16,10 @@ import android.widget.TextView;
 import com.evandro.cards.core.Globally;
 import com.evandro.cards.core.MainAdapter;
 import com.evandro.cards.core.MyDate;
-import com.evandro.cards.core.Transaction;
+import com.evandro.cards.core.Util;
 import com.evandro.cards.dao.TransactionDAO;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,27 +61,14 @@ public class MainActivity extends AppCompatActivity {
     date();
     globally.init(this);
 
-    ArrayAdapter<String> cardAdapter = new ArrayAdapter<>(
-      this,
-      R.layout.item_spinner,
-      R.id.txtSpinner,
-      globally.getCards()
-    );
-    spCards.setAdapter(cardAdapter);
-
-    ArrayAdapter<String> personAdapter = new ArrayAdapter<>(
-      this,
-      R.layout.item_spinner,
-      R.id.txtSpinner,
-      globally.getPeople()
-    );
-    spPeople.setAdapter(personAdapter);
+    Util.fillSpinner(this, globally.getCards(), spCards);
+    Util.fillSpinner(this, globally.getPeople(), spPeople);
 
     ListView list = findViewById(R.id.list);
     MainAdapter adapter;
     list.invalidateViews();
     TransactionDAO transactionDAO = new TransactionDAO(this);
-    adapter = new MainAdapter(activity, transactionDAO.getAll());
+    adapter = new MainAdapter(activity, transactionDAO.getByMonth(myDate.getDate()));
     list.setAdapter(adapter);
   }
 
@@ -97,16 +82,10 @@ public class MainActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-//      case R.id.itemUpdate:
-//        myDate.setToday();
-//        update();
-//        break;
       case R.id.action_cards:
-//        BankActivity.myTitle = new MyTitle("Itaú", "Michelle");
         intentTo(FormCardActivity.class);
         break;
       case R.id.action_people:
-//        BankActivity.myTitle = new MyTitle("Nubank", "Michelle");
         intentTo(FormPersonActivity.class);
         break;
       case R.id.action_insert:
